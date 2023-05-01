@@ -1,4 +1,4 @@
 apiVersion: v2
 name: seldoncore-model-serving
-version: 0.1.0
+version: 1.0.0
 description: Helm chart for deploying model using seldoncore.
