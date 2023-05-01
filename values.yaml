@@ -1,0 +1,6 @@
+base_image: "seldonio/seldon-core-s2i-python3:1.13.0" # After install pip should be the base-image-model:0.x
+model:
+  artifact_folder: "7"
+  artifact_id: "654e380f0f074937a5cdcc8236ea5ec5"  # Should acess to path ~/mlflow/mlruns/{artifact_folder}/{artifact_id}/...
+  type: "regression"  # Should be in ["classification", "regression"]
+  image: mlopscapstone/model_test:0.7

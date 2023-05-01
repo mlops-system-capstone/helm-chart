@@ -1,0 +1,35 @@
+apiVersion: machinelearning.seldon.io/v1
+kind: SeldonDeployment
+metadata:
+  name: {{ .Release.Name }}-sdep
+spec:
+  name: {{ .Release.Name }}
+  annotations:
+    seldon.io/istio-gateway: {{ .Release.Name }}-gw
+    seldon.io/istio-host: "*"
+  predictors:
+    - annotations:
+        seldon.io/svc-name: {{ .Release.Name }}-svc
+      componentSpecs:
+       - spec:
+           containers:
+           - image: {{ .Values.model.image }}
+             imagePullPolicy: Always
+             name: classifier
+             securityContext:
+                readOnlyRootFilesystem: false
+             ports:
+             - containerPort: 5000
+               name: http
+               protocol: TCP
+           terminationGracePeriodSeconds: 1
+      graph:
+        # implementation: MLFLOW_SERVER
+        # modelUri: /home/seniorstd/mlflow/mlruns/604331056731357376/1ca67fbf81ca4045aecf20c1f2b8ce32/artifacts/model/model.pkl
+        # type: MODEL
+        name: classifier
+        endpoint:
+          httpPort: 5000
+       # endpoint:
+          # type: REST
+      name: model
