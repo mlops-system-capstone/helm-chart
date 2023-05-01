@@ -2,11 +2,11 @@ apiVersion: v1
 entries:
   seldoncore-model-serving:
   - apiVersion: v2
-    created: "2023-05-01T16:10:44.260053987Z"
+    created: "2023-05-01T16:28:34.31870918Z"
     description: Helm chart for deploying model using seldoncore.
     digest: 471358eb87504f1ce2b4bef88f99a7ad42605420da30a3bd4ceaabb5483e005e
     name: seldoncore-model-serving
     urls:
-    - https://github.com/mlops-system-capstone/helm-chart.git/seldoncore-model-serving-0.1.0.tgz
+    - https://mlops-system-capstone.github.io/helm-chart/seldoncore-model-serving-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-01T16:10:44.259168038Z"
+generated: "2023-05-01T16:28:34.31784212Z"
