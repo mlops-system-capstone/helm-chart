@@ -11,6 +11,10 @@ spec:
     - annotations:
         seldon.io/svc-name: {{ .Release.Name }}-svc
       componentSpecs:
+       - metadata:
+            annotations:
+              mlops.prometheus/scrape: "true"
+              mlops.prometheus/owner: {{ .Values.username }}
        - spec:
            containers:
            - image: {{ .Values.model.image }}

@@ -1,0 +1,164 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-user-conf-{{ .Values.username }}
+  namespace: monitoring
+  labels:
+    name: prometheus-user-conf-{{ .Values.username }}
+data:
+  prometheus.yml: |-
+    scrape_configs:
+      - job_name: 'federate dcgm-exporter'
+        scrape_interval: 1s
+        scrape_timeout: 1s
+        honor_labels: true
+        metrics_path: '/federate'
+        params:
+          'match[]':
+            - '{job="scrape dcgm-exporter"}'
+        kubernetes_sd_configs:
+        - role: endpoints
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_service_annotation_mlops_prometheus_scrape]
+          action: keep
+          regex: true
+        - source_labels: [__meta_kubernetes_service_annotation_mlops_prometheus_scheme]
+          action: replace
+          target_label: __scheme__
+          regex: (https?)
+        - source_labels: [__address__, __meta_kubernetes_service_annotation_mlops_prometheus_port]
+          action: replace
+          target_label: __address__
+          regex: ([^:]+)(?::\d+)?;(\d+)
+          replacement: $1:$2
+        - source_labels: [__meta_kubernetes_namespace]
+          action: replace
+          target_label: kubernetes_namespace
+        - source_labels: [__meta_kubernetes_service_name]
+          action: keep
+          regex: prometheus-master
+        - source_labels: [__meta_kubernetes_service_name]
+          action: replace
+          target_label: kubernetes_service
+        - source_labels: [__meta_kubernetes_pod_name]
+          action: replace
+          target_label: kubernetes_pod
+        metric_relabel_configs:
+        - source_labels: [holder_pod]
+          action: keep
+          regex: (.*)-US{{ .Values.username }}UE-(.*)
+                
+      - job_name: 'scrape classifier'
+        scrape_interval: 1s
+        scrape_timeout: 1s
+        kubernetes_sd_configs:
+        - role: pod
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_pod_container_name]
+          action: keep
+          regex: classifier
+        - source_labels: [__meta_kubernetes_pod_annotation_mlops_prometheus_scrape]
+          action: keep
+          regex: true
+        - source_labels: [__meta_kubernetes_pod_annotation_mlops_prometheus_owner]
+          action: keep
+          regex: {{ .Values.username }}
+        - source_labels: [__meta_kubernetes_pod_annotation_mlops_prometheus_scheme]
+          action: replace
+          target_label: __scheme__
+          regex: (https?)
+        - source_labels: [__meta_kubernetes_pod_container_port_number]
+          action: keep
+          regex: 6000
+        - action: replace
+          target_label: __metrics_path__
+          replacement: /prometheus
+        - source_labels: [__meta_kubernetes_namespace]
+          action: replace
+          target_label: kubernetes_namespace
+        - source_labels: [__meta_kubernetes_service_name]
+          action: replace
+          target_label: kubernetes_service
+        - source_labels: [__meta_kubernetes_pod_name]
+          action: replace
+          target_label: kubernetes_pod
+        - source_labels: [__meta_kubernetes_pod_container_name]
+          action: replace
+          target_label: container_name
+          regex: (.+)      
+      - job_name: 'scrape seldon-container-engine'
+        scrape_interval: 1s
+        scrape_timeout: 1s
+        kubernetes_sd_configs:
+        - role: pod
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_pod_container_name]
+          action: keep
+          regex: seldon-container-engine
+        - source_labels: [__meta_kubernetes_pod_annotation_mlops_prometheus_scrape]
+          action: keep
+          regex: true
+        - source_labels: [__meta_kubernetes_pod_annotation_mlops_prometheus_owner]
+          action: keep
+          regex: {{ .Values.username }}
+        - source_labels: [__meta_kubernetes_pod_annotation_mlops_prometheus_scheme]
+          action: replace
+          target_label: __scheme__
+          regex: (https?)
+        - source_labels: [__meta_kubernetes_pod_container_port_number]
+          action: keep
+          regex: 8000
+        - action: replace
+          target_label: __metrics_path__
+          replacement: /prometheus
+        - source_labels: [__meta_kubernetes_namespace]
+          action: replace
+          target_label: kubernetes_namespace
+        - source_labels: [__meta_kubernetes_service_name]
+          action: replace
+          target_label: kubernetes_service
+        - source_labels: [__meta_kubernetes_pod_name]
+          action: replace
+          target_label: kubernetes_pod
+        - source_labels: [__meta_kubernetes_pod_container_name]
+          action: replace
+          target_label: container_name
+          regex: (.+)      
+      - job_name: 'scrape mlflow'
+        scrape_interval: 1s
+        scrape_timeout: 1s
+        kubernetes_sd_configs:
+        - role: pod
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_pod_container_name]
+          action: keep
+          regex: mlflow
+        - source_labels: [__meta_kubernetes_pod_annotation_mlops_prometheus_scrape]
+          action: keep
+          regex: true
+        - source_labels: [__meta_kubernetes_pod_annotation_mlops_prometheus_owner]
+          action: keep
+          regex: {{ .Values.username }}
+        - source_labels: [__meta_kubernetes_pod_annotation_mlops_prometheus_scheme]
+          action: replace
+          target_label: __scheme__
+          regex: (https?)
+        - source_labels: [__meta_kubernetes_pod_container_port_number]
+          action: keep
+          regex: 5050
+        - action: replace
+          target_label: __metrics_path__
+          replacement: /metrics
+        - source_labels: [__meta_kubernetes_namespace]
+          action: replace
+          target_label: kubernetes_namespace
+        - source_labels: [__meta_kubernetes_service_name]
+          action: replace
+          target_label: kubernetes_service
+        - source_labels: [__meta_kubernetes_pod_name]
+          action: replace
+          target_label: kubernetes_pod
+        - source_labels: [__meta_kubernetes_pod_container_name]
+          action: replace
+          target_label: container_name
+          regex: (.+)

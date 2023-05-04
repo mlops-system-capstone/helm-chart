@@ -1,2 +1,3 @@
+username: for-testing-username
 model:
   image: mlopscapstone/model_test:0.7

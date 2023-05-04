@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-user-{{ .Values.username }}
+  namespace: monitoring
+  labels:
+    app: prometheus-user-app-{{ .Values.username }}
+spec:
+  selector:
+    matchLabels:
+      app: prometheus-user-app-{{ .Values.username }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: prometheus-user-app-{{ .Values.username }}
+    spec:
+      serviceAccountName: monitoring-service-account
+      containers:
+        - name: prometheus-user
+          image: prom/prometheus:v2.42.0
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - name: config
+              mountPath: /etc/prometheus
+      volumes:
+        - name: config
+          configMap:
+            name: prometheus-user-conf-{{ .Values.username }}

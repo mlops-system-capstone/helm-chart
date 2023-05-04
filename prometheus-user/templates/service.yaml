@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-user-{{ .Values.username }}
+  namespace: monitoring
+  annotations:
+    mlops.prometheus/scrape: "true"
+    mlops.prometheus/owner: "master"
+    mlops.prometheus/path: "/metrics"
+    mlops.prometheus/port: "9090"
+spec:
+  selector:
+    app: prometheus-user-app-{{ .Values.username }}
+  ports:
+    - port: 9090
