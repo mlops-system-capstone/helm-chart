@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   prometheus-user:
   - apiVersion: v2
-    created: "2023-05-05T09:06:41.371209095Z"
+    created: "2023-05-05T09:16:07.382318354Z"
     description: Helm chart for deploying prometheus pods.
     digest: 9be75a500e342163a2b14cb6d26cfaca1e293ef437d5528f63af277d6206deca
     name: prometheus-user
@@ -11,7 +11,7 @@ entries:
     version: 1.0.0
   seldoncore-model-serving:
   - apiVersion: v2
-    created: "2023-05-05T09:06:41.373236305Z"
+    created: "2023-05-05T09:16:07.382815107Z"
     description: Helm chart for deploying model using seldoncore with prometheus pod
       annotations.
     digest: 060a7e53a51216aac41be7f80cd56f54bcb8f558fc6956ba6a44332cd9d49d0e
@@ -19,30 +19,4 @@ entries:
     urls:
     - https://mlops-system-capstone.github.io/helm-chart/seldoncore-model-serving-1.1.2.tgz
     version: 1.1.2
-  - apiVersion: v2
-    created: "2023-05-05T09:06:41.372666674Z"
-    description: Helm chart for deploying model using seldoncore with prometheus pod
-      annotations.
-    digest: 84647d61c555f6962519f7fcacb17db43dbbb81164e759d349c025277d09e28f
-    name: seldoncore-model-serving
-    urls:
-    - https://mlops-system-capstone.github.io/helm-chart/seldoncore-model-serving-1.1.1.tgz
-    version: 1.1.1
-  - apiVersion: v2
-    created: "2023-05-05T09:06:41.372171848Z"
-    description: Helm chart for deploying model using seldoncore with prometheus pod
-      annotations.
-    digest: 9c6d85fba932a39edcce685218fb97045c8682624597b55bbafc7940044a3205
-    name: seldoncore-model-serving
-    urls:
-    - https://mlops-system-capstone.github.io/helm-chart/seldoncore-model-serving-1.1.0.tgz
-    version: 1.1.0
-  - apiVersion: v2
-    created: "2023-05-05T09:06:41.371739457Z"
-    description: Helm chart for deploying model using seldoncore.
-    digest: 448f5fcb1b1e36455ffd19226954c1497035d00afb5960a6e1c491a967b176e0
-    name: seldoncore-model-serving
-    urls:
-    - https://mlops-system-capstone.github.io/helm-chart/seldoncore-model-serving-1.0.0.tgz
-    version: 1.0.0
-generated: "2023-05-05T09:06:41.370059723Z"
+generated: "2023-05-05T09:16:07.381440235Z"
