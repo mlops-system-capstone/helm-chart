@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   prometheus-user:
   - apiVersion: v2
-    created: "2023-05-04T17:09:56.71641576Z"
+    created: "2023-05-05T08:42:28.416251658Z"
     description: Helm chart for deploying prometheus pods.
     digest: 9be75a500e342163a2b14cb6d26cfaca1e293ef437d5528f63af277d6206deca
     name: prometheus-user
@@ -11,20 +11,20 @@ entries:
     version: 1.0.0
   seldoncore-model-serving:
   - apiVersion: v2
-    created: "2023-05-04T17:09:56.716828842Z"
+    created: "2023-05-05T08:42:28.417096363Z"
     description: Helm chart for deploying model using seldoncore with prometheus pod
       annotations.
-    digest: ada7be78fc67ba3b28cee7185b65143310fb095f7e4290446d28c8a3b539191d
+    digest: 9c6d85fba932a39edcce685218fb97045c8682624597b55bbafc7940044a3205
     name: seldoncore-model-serving
     urls:
     - https://mlops-system-capstone.github.io/helm-chart/seldoncore-model-serving-1.1.0.tgz
     version: 1.1.0
   - apiVersion: v2
-    created: "2023-05-04T17:09:56.716618963Z"
+    created: "2023-05-05T08:42:28.416886504Z"
     description: Helm chart for deploying model using seldoncore.
     digest: 448f5fcb1b1e36455ffd19226954c1497035d00afb5960a6e1c491a967b176e0
     name: seldoncore-model-serving
     urls:
     - https://mlops-system-capstone.github.io/helm-chart/seldoncore-model-serving-1.0.0.tgz
     version: 1.0.0
-generated: "2023-05-04T17:09:56.716036932Z"
+generated: "2023-05-05T08:42:28.415183878Z"
