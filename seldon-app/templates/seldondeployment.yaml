@@ -11,10 +11,6 @@ spec:
     - annotations:
         seldon.io/svc-name: {{ .Release.Name }}-svc
       componentSpecs:
-       - metadata:
-            annotations:
-              mlops.prometheus/scrape: "true"
-              mlops.prometheus/owner: {{ .Values.username }}
        - spec:
            containers:
            - image: {{ .Values.model.image }}
@@ -27,6 +23,10 @@ spec:
                name: http
                protocol: TCP
            terminationGracePeriodSeconds: 1
+           metadata:
+            annotations:
+              mlops.prometheus/scrape: "true"
+              mlops.prometheus/owner: {{ .Values.username }}
       graph:
         # implementation: MLFLOW_SERVER
         # modelUri: /home/seniorstd/mlflow/mlruns/604331056731357376/1ca67fbf81ca4045aecf20c1f2b8ce32/artifacts/model/model.pkl
