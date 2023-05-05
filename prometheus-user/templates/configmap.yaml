@@ -46,7 +46,7 @@ data:
         metric_relabel_configs:
         - source_labels: [holder_pod]
           action: keep
-          regex: (.*)-US{{ .Values.username }}UE-(.*)
+          regex: (.*)-{{ .Values.username }}-(.*)
                 
       - job_name: 'scrape classifier'
         scrape_interval: 1s
